@@ -1,0 +1,70 @@
+pip2 commands (the assignment says pip but homebrew installed pip2 and when I try to run a pip command I get an error... maybe the course material needs to be updated.)
+
+1. pip2 install Django 
+    -didn't run - error saying not supported, I did some research and since Django was just updated and pip2 is trying to install newest 
+    version (which isn't compatiable with python 2.7). After more searching on Stack Overflow I found that you can install an older version
+    of Django like:
+1a. pip2 install Django==1.11
+
+    it worked!
+
+2. pip2 list 
+    outputs the following:
+
+    click (6.7)
+    Django (1.11)
+    Flask (0.12.2)
+    itsdangerous (0.24)
+    Jinja2 (2.10)
+    MarkupSafe (1.0)
+    pip (9.0.1)
+    pytz (2017.3)
+    setuptools (38.2.5)
+    Werkzeug (0.13)
+    wheel (0.30.0)
+
+3 pip2 install Django==1.11 (again)
+    outputs the following:
+
+    Requirement already satisfied: django==1.11 in /usr/local/lib/python2.7/site-packages
+    Requirement already satisfied: pytz in /usr/local/lib/python2.7/site-packages (from django==1.11)
+
+4. pip2 freeze
+    outputs similar to pip2 list, but with a few items not present and == instead of ():
+
+    click==6.7
+    Django==1.11
+    Flask==0.12.2
+    itsdangerous==0.24
+    Jinja2==2.10
+    MarkupSafe==1.0
+    pytz==2017.3
+    Werkzeug==0.13
+
+5. pip2 freeze > requirements.txt
+    added a requirements.txt file to my Desktop
+
+6. looking in the requirements.txt file it shows the same info as if I had just ran the freeze command on the command line - interesting: 
+
+    click==6.7
+    Django==1.11
+    Flask==0.12.2
+    itsdangerous==0.24
+    Jinja2==2.10
+    MarkupSafe==1.0
+    pytz==2017.3
+    Werkzeug==0.13
+
+
+7. pip2 uninstall Django 
+    showed a ton of files then asked if I wanted to proceed (y/n)
+    I typed y return an dit finished unistalling successfull:
+
+    Successfully uninstalled Django-1.11
+
+8. pip2 show Django
+    nothing happens and it gives me a new command line prompt
+
+9. pip2 search Flask
+    spit out a few hundred files relating to Flask
+
