@@ -5,7 +5,7 @@ app.secret_key = 'ThisIsSecret'
 
 @app.route('/')
 def home():
-    return render_template('index.html', count=session['count'])
+    return render_template('index.html')
 
 @app.route('/count', methods=['POST'])
 def view_count():
