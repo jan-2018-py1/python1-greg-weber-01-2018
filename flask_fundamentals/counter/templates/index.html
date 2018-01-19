@@ -9,5 +9,12 @@
 <body>
     <h1>Counter</h1>
     <p>{{session['count']}} times.</p>
+    <p>refresh browser to increase count by 1</p>
+    <form action="/process" method="post">
+        <input type="submit" value="add 2">
+    </form>
+    <form action="/reset" method='post'>
+        <input type="submit" value="reset">
+    </form>
 </body>
 </html>
