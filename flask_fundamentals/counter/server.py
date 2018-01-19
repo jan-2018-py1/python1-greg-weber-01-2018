@@ -17,11 +17,10 @@ def submit_button():
 
 @app.route('/reset', methods=['POST'])
 def reset():
-    session['count'] = -1
+    session['count'] = 0
     return redirect('/')
 
 app.run(debug=True)
-
 
 
 
