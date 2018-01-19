@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number Gmet</title>
+</head>
+<body>
+    <h1>Welcome to the great number game!</h1>
+    <!-- <p>the random number is {{ session['random_num'] }}</p> -->
+    <p>I'm thinking of a number between 1 and 100 - take a guess!</p>
+    <form action="/guess" method='post'>
+    <input type="text" name="guess">
+    <input type="submit">
+    </form>
+    <form action="/reset" method="post">
+        <input type="submit" value='reset random'>
+    </form>
+</body>
+</html>
