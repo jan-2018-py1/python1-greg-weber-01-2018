@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Results</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Submitted info</h1>
+        <p>Name: {{name}}</p>
+        <p>Location: {{location}}</p>
+        <p>Language: {{language}}</p>
+        <p class="comment_label">Comments:(scroll right...)</p>
+        <div id="comment">{{comment}}</div> 
+        <form action="/return" method='post'>
+            <input type="submit" value="return">
+        </form>
+    </div>
+</body>
+</html>
