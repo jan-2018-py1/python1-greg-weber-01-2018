@@ -7,13 +7,13 @@ div{
     text-align: center;
     margin-left: 25px;
 }
+
 #wrapper{
     padding:20px;
     border: 1px solid black;
     width: 875px;
     height: 100%;
     text-align: center;
-
 }
 
 #activities{
@@ -25,7 +25,6 @@ div{
     margin-left: 25px;
     margin-top: 0px;
     overflow: scroll;
-
 }
 
 #your_gold{
