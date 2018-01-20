@@ -4,7 +4,6 @@ app.secret_key = 'this_time_its_payback'
 import random 
 from time import ctime
  
-
 @app.route('/')
 def home():
     #initalize gold vars if they haven't been used yet
@@ -17,14 +16,10 @@ def home():
         session['got_gold'] = [] #a liist to store the activity log when we get gold
         session['lost_gold'] = [] #a liist to store the activity log when we loose gold
         session['mood'] = '' #this will help us determine which activity to print
-
-
     return render_template('index.html')
 
-
-
 @app.route('/process_money', methods=['POST'])
-def get_gold():
+def gold_digger():
 
     string = '' #we will use this string to build our activity log
 
