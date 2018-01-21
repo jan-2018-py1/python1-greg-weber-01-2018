@@ -1,12 +1,13 @@
 .wrapper{
     border: 1px solid black;
-    width: 350px;
+    width: 420px;
     padding: 25px;
     text-align: left;
     margin: 100px;
 }
 
 #comment{
+    width:100%;
     border: 1px solid black;
     height: 25px;
     overflow: scroll;

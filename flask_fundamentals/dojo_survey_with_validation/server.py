@@ -8,17 +8,25 @@ def index():
 
 @app.route('/results', methods=['POST'])
 def results():
-    if len(request.form['name']) < 1:
-        flash("***Name cannot be empty!***")
-        return redirect('/')
-    if len(request.form['location']) < 1:
-        flash("***Location cannot be empty!****")
-        return redirect('/')
-    if len(request.form['comment']) > 121:
-        flash("***comment cant be longer than 120!****")
-        return redirect('/')
+    #setup error boolean
+    error = False
 
-    return render_template('/results.html', name = request.form['name'], location = request.form['location'],  language = request.form['language'], comment = request.form['comment'], )
+    #validification checks
+    if len(request.form['name']) < 1:
+        flash("*** Name cannot be empty! ***")
+        error = True
+    if len(request.form['location']) < 1:
+        flash("*** Location cannot be empty! ****")
+        error = True
+    if len(request.form['comment']) > 121:
+        flash("*** comment cant be longer than 120 characters! ****")
+        error = True
+
+    #redirect if error or render results page if no error
+    if error == True:
+        return redirect('/')
+    else:
+        return render_template('/results.html', name = request.form['name'], location = request.form['location'],  language = request.form['language'], comment = request.form['comment'], )
 
 @app.route('/return', methods=['POST'])
 def go_home():
