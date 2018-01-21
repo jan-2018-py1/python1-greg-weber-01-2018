@@ -8,19 +8,15 @@ from time import ctime
 # order regardless of getting gold or loseing gold, but since they need to have different text color I haven't 
 # fuigured how to do that yet. I made a different key in sessions for each activity - get gold or loose gold - and 
 # then logged that in my html one after the other.  My thought to log all regardless of color would be to store 
-# info in a list or dict and then append that to session['activity'] - so all info in one key of session rather
-#  than two ... so it would end up looking like [{'happy':'got gold'},{'sad':'lost gold'}, ....] -- then use some 
-# conditionals and loops to extract the correct info and display the correct text color.  
+# info in a list or dict and then append that to session['activity'] - so all info in one key of session rather  than two ... 
+# so it would end up looking like activity['session'] = [{'color':'green', 'event':'got gold...'},{'color':'red', 'event: lost gold'}, ...]
+# then use the color value to set the class in the html and the activity value to log the activity  
  
 @app.route('/')
 def home():
     #initalize gold vars if they haven't been used yet
     if 'gold_count' not in session:
         session['gold_count'] = 0
-        session['farm_gold'] = 0
-        session['cave_gold'] = 0
-        session['house_gold'] = 0
-        session['casino_gold'] = 0
         session['got_gold'] = [] #a liist to store the activity log when we get gold
         session['lost_gold'] = [] #a liist to store the activity log when we loose gold
         #session['mood'] = '' #this will help us determine which activity to print
@@ -35,40 +31,38 @@ def gold_digger():
     now = ctime()
 
     if request.form['building'] == 'farm':
-        session['farm_gold'] = random.randrange(10, 21)
-        session['gold_count'] += session['farm_gold']
-        string = 'Earned {} gold from the farm! ({})'.format(session['farm_gold'], now)
+        gold = random.randrange(10, 21)
+        session['gold_count'] += gold
+        string = 'Earned {} gold from the farm! ({})'.format(gold, now)
         session['got_gold'].append(string)
-        # session['mood'] = 'happy'
+        session['mood'] = 'green'
 
     if request.form['building'] == 'cave':
-        session['cave_gold'] = random.randrange(5, 11)
-        session['gold_count'] += session['cave_gold']
-        string = 'Earned {} gold from the cave! ({})'.format(session['cave_gold'], now)
+        gold = random.randrange(5, 11)
+        session['gold_count'] += gold
+        string = 'Earned {} gold from the cave! ({})'.format(gold, now)
         session['got_gold'].append(string)
-        # session['mood'] = 'happy'
+        session['mood'] = 'green'
 
     if request.form['building'] == 'house':
-        session['house_gold'] = random.randrange(2,6)
-        session['gold_count'] += session['house_gold']
-        string = 'Earned {} gold from the house! ({})'.format(session['house_gold'], now)
+        gold = random.randrange(2,6)
+        session['gold_count'] += gold
+        string = 'Earned {} gold from the house! ({})'.format(gold, now)
         session['got_gold'].append(string)
-        # session['mood'] = 'happy'
+        session['mood'] = 'green'
 
-    #random 0 or 1 will give 50/50 give/take value to casino gold
-    give_take = random.randrange(0,2)
     if request.form['building'] == 'casino':
-        session['casino_gold'] = random.randrange(0, 51)
-        if give_take == 0:
-            session['gold_count'] += session['casino_gold']
-            string = 'Winner!! You won {} gold at the casino! ({})'.format(session['casino_gold'], now)
+        gold = random.randrange(-50, 51)
+        if gold > -1:
+            session['gold_count'] += gold
+            string = 'Winner!! You won {} gold at the casino! ({})'.format(gold, now)
             session['got_gold'].append(string)
-            # session['mood'] = 'happy'
+            session['mood'] = 'green'
         else:
-            session['gold_count'] -= session['casino_gold']
-            string = 'Ahhhh, too bad... you lost {} gold from the casino! ({})'.format(session['casino_gold'], now)
+            session['gold_count'] -= gold
+            string = 'Ahhhh, too bad... you lost {} gold from the casino! ({})'.format(gold, now)
             session['lost_gold'].append(string)
-            # session['mood'] = 'sad'
+            session['mood'] = 'red'
 
     return redirect('/')
 
