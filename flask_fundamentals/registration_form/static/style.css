@@ -2,18 +2,28 @@
     padding: 25px;
     border:1px solid black;
     text-align: center;
-    width: 185px;
+    width: 355px;
     box-shadow: 2px 2px;
+    margin-left: 50px;
 }
-
+h1{
+    margin-left: 50px;
+}
+form{
+    margin-left: 50px;
+}
 input{
     font-size: 14px;
     height: 20px;
+    width: 225px;
     display: block;
     margin: 10px;
     border-radius: 3px;
 }
 
 #submit{
-    margin-left:100px;
+    margin-left:145px;
+    width: 70px;
+    border-radius: 3px;
+    background-color: aquamarine;
 }
