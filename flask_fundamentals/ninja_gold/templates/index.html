@@ -45,11 +45,8 @@
         </div>
         <h3 id="log_title">Activity Log: (scroll down to see more...)</h3>
         <div id="activities">
-            {% for value in session['got_gold'] %}
-                <p class="green">{{ value }}</p>
-            {% endfor %}
-            {% for value in session['lost_gold'] %}
-                <p class="red">{{ value }}</p>
+            {% for element in session['activity'] %}
+                <p class={{element[0]}}>{{element[1]}}</p>
             {% endfor %}
         </div>
     </div>
