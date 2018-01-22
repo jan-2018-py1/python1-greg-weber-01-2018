@@ -45,8 +45,8 @@
         </div>
         <h3 id="log_title">Activity Log: (scroll down to see more...)</h3>
         <div id="activities">
-            {% for element in session['activity'] %}
-                <p class={{element[0]}}>{{element[1]}}</p>
+            {% for event in session['activity'] %}
+                <p class={{event[0]}}>{{event[1]}}</p>
             {% endfor %}
         </div>
     </div>
