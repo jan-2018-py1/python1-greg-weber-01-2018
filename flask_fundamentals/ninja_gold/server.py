@@ -6,19 +6,17 @@ from time import ctime
  
 @app.route('/')
 def home():
-    #initalize gold vars if they haven't been used yet
+    #initalize sessions if they haven't been used yet
     if 'gold_count' not in session:
         session['gold_count'] = 0
         session['activity'] = []
-        # session['got_gold'] = [] #a liist to store the activity log when we get gold
-        # session['lost_gold'] = [] #a liist to store the activity log when we loose gold
     return render_template('index.html')
 
 @app.route('/process_money', methods=['POST'])
 def gold_digger():
-    #we will use this string to build our activity log
+    #empty string to build activity log
     string = '' 
-    #empty list we will use to build our activity log
+    #empty list to build our activity log
     event = []
     #determine date/time 
     now = ctime()
@@ -57,6 +55,12 @@ def gold_digger():
             event = ['red', string]
             session['activity'].insert(0, event)
            
+    return redirect('/')
+
+@app.route('/reset')
+def reset():
+    session['gold_count'] = 0
+    session['activity'] = []
     return redirect('/')
 
 app.run(debug=True)
