@@ -57,7 +57,7 @@ def process():
     if name_has_num:
         flash("*** Names must not contain any numbers ***")
     if password_too_long:
-        flash("*** Pasword too long - must be 9 or fewer characters ***")
+        flash("*** Pasword too long - must be 8 or fewer characters ***")
     if not password_match:
         flash("*** Passwords must match! ***")
     if not email_valid:
