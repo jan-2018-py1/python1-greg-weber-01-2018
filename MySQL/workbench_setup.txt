@@ -1,0 +1,24 @@
+server setup:
+    brew install mysql
+    brew services start mysql
+    mysqladmin -u root password "root"
+    mysql -u root -p
+
+imported the twitter db
+
+queries:
+SELECT * FROM users
+SELECT handle FROM users
+SELECT tweet FROM tweets
+SELECT tweet FROM tweets WHERE tweet LIKE'%power%'
+SELECT first_name, last_name FROM users ORDER BY birthday DESC
+SELECT * FROM users WHERE last_name LIKE 'B%'
+SELECT first_name from users ORDER BY first_name
+SELECT last_name from users WHERE id = 3
+SELECT last_name from users WHERE id > 2
+SELECT handle as nickname, birthday as dob FROM users ORDER BY birthday DESC
+    
+ 
+
+
+
