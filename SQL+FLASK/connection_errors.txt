@@ -1,0 +1,44 @@
+1.   'database': mydb, # we got db as an argument
+NameError: global name 'mydb' is not defined
+
+fix: enter correct value for the  key 'database': db 
+
+
+2.  File "/Users/homefolder/Desktop/flask_mysql/mysqlconnection.py", line 8, in __init__
+    'host': localhost,
+NameError: global name 'localhost' is not defined
+
+fixed the name error again - this time I had to make sure it was a string being basses as the congif value of key 'host'.
+
+
+3.    from mysqlconnection import MySQLConnector
+  File "/Users/homefolder/Desktop/flask_mysql/mysqlconnection.py", line 13
+    }
+    ^
+SyntaxError: invalid syntax
+
+fix: there was no value after the port key - added value : '3306'
+
+
+4.  sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (61)") (Background on this error at: http://sqlalche.me/e/e3q8)
+
+fix: port number was wrong changed to correct '3306'
+
+
+5.  sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)") (Background on this error at: http://sqlalche.me/e/e3q8)
+
+
+fix: password was incorrect - changet to 'root'
+
+
+6.  DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['poort'], config['database'])
+KeyError: 'poort'
+
+fix: port was spelled incorrectly - changed to from 'poort' to 'port'
+
+
+7.    DATABASE_URI = mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+                        ^
+SyntaxError: invalid syntax
+
+fix: add the missing " in front of mysql
