@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Successful Emails</title>
+</head>
+<body>
+    <div id="greenBox">
+        <!-- green div with affirming message -->
+    </div>
+    <div id="emails">
+        <h2>Email Address Entered:</h2>
+        <!-- loop thru users table and display all valid emails -->
+        {% for email in all_emails: %}
+        <p> {{ email.email }} <span>   </span>  {{email.created_at}}</p>
+        {% endfor %}
+    </div>
+    <div id="delete">
+        <!-- input field to add a name to delete an email user -->
+    </div>
+</body>
+</html>
