@@ -37,5 +37,12 @@ def process():
     return redirect('/')
     # if valid insert ito database
 
+@app.route('/delete_user', methods=['POST'])
+def user_delete():
+    query = 'Delete FROM users ORDER BY id DESC limit 1 '
+    mysql.query_db(query)
+    
+    return render_template('index.html')
+
 
 app.run(debug=True)
