@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#display{
+    width: 400px;
+    height: 200px;
+    overflow: scroll;
+}
+
+div{
+    border: 1px solid black;
+    margin-left: 200px;
+    margin-top: 125px;
+    width: 205px;
+    padding: 20px;
+    border-radius: 5px;
+}
+form{
+    text-align: justify;
+}
+
+h1{
+    margin-bottom: 20px;
+}
+
+#submit{
+    margin: 15px 0px 0px 145px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+    text-align: justify
+}
+table, th, td{
+    padding: 5px;
+    border: 1px solid black;
+ }
