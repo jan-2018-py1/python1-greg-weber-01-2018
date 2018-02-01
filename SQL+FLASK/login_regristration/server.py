@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, session, flash
 from mysqlconnection import MySQLConnector
 import re
+import md5
 
 app = Flask(__name__)
 mysql = MySQLConnector(app, 'login_registration')
@@ -13,30 +14,30 @@ app.secret_key = '876dsf87ysuid'
 def index():
     return render_template('index.html')
 
-@app.sucess('/sucess', methods=['POST'])
+@app.route('/success', methods=['POST'])
 def success():
     # pull data from form
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     email = request.form['email']
-    password = request.form['password']
-    password_confirm = request.form['confirm_password']
+    password = md5.new(request.form['password']).hexdigest()
+    confirm_password = md5.new(request.form['confirm_password']).hexdigest()
 
     #validate data and set error messages if needed
     errors = False
     if not first_name.isalpha() or len(first_name)<1:
-        flash('name must contain no numbers and be at least 2 characters')
+        flash('first name must contain no numbers and be at least 2 characters')
         errors = True
     if not last_name.isalpha() or len(last_name)<1:
-        flash('name must contain no numbers and be at least 2 characters')
+        flash('last name must contain no numbers and be at least 2 characters')
         errors = True
     if not EMAIL_REGEX.match(email): #false if not in proper format
         flash('invalid email format')
         errors = True
-    if len(password) < 8:
+    if len(request.form['password']) < 8 or len(request.form['confirm_password']) < 8:
         flash('password must be at least 8 characters')
         errors = True 
-    if not password.match(password_confirm):
+    if not password == confirm_password:
         flash("passwords don't match")
         errors = True
 
@@ -45,7 +46,7 @@ def success():
         return redirect('/')
     # else if valid submit to db redirect to index with flash success message promting login
     else:
-        query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:fName, lName:, email, password, NOW(), NOW())"
+        query = "INSERT INTO users (first_name, last_name, email, password, created_at, updatrd_at) VALUES (:fName, :lName, :email, :password, NOW(), NOW())"
         data = {
             'fName' : first_name,
             'lName' : last_name,
@@ -56,26 +57,27 @@ def success():
         flash('successful registration, please login')
         return redirect ('/')
 
-app.route('/user', methods=['POST'])
+@app.route('/user', methods=['POST'])
 def login():
+    print "+"* 100
     # login data
-    email = request.form['emal']
-    password = request.form['password']
-
+    email = request.form['email']
+    print email
+    password = md5.new(request.form['password']).hexdigest()
+    print password
+    print "+"*100
     #check if login info in db
-    query = "SELECT * FROM users WHERE email = `email` and password = `password`(:email, :password)"
-    print query
+    query = "SELECT * FROM users WHERE users.email = :email AND users.password = :password"
     data = {
         'email' : email,
         'password' : password
     }
-    result = mysql.query_db(query, data)
-    print result
-    if len(result) > 0 #successfuly found a match in the db
-        message = 'hello', result[0]['name']
+    logedin_user = mysql.query_db(query, data)
+    if len(logedin_user)>0:
+        message = 'hello {}, welcome to your personal page'.format(logedin_user[0]['first_name'])
         return render_template('user_page.html', greeting=message)
     else:
-        flash("email and/or password invalid please try again")
+        flash("login failed: email and/or password invalid please try again")
         return redirect('/')
 
 app.run(debug=True)

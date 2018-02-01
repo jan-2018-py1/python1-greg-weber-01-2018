@@ -19,8 +19,7 @@
             <input type="submit" class="submit">
         </form>
     </div>
-    <div>
-     <!-- if invalid entry flash error messages -->
+    <div id='errors'> <!-- if invalid entry flash error messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -31,7 +30,7 @@
     </div>
     <div id="login">
         <h3>Login returning user:</h3>
-        <form action="usser" method="post">
+        <form action="user" method="post">
             <input type="text" name="email" placeholder="email">
             <input type="text" name="password" placeholder="password">
             <input type="submit" class="submit">
