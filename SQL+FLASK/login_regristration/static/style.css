@@ -1,0 +1,25 @@
+div{
+    margin: 50px 0 0 200px;
+    border: 1px solid black;
+    width: 166px;
+    padding: 25px;
+    border-radius:5px;
+}
+#register{
+    height: 270px;
+}
+
+#login{
+    height: 200px;
+}
+
+
+input{
+    margin: 3px;
+    padding:5px;
+    border-radius: 5px;
+}
+
+.submit{
+    box-shadow: 2px 2px;
+}
