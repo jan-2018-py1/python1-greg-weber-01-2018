@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, session, flash
 from mysqlconnection import MySQLConnector
 import re
 import md5
+from datetime import datetime 
 
 app = Flask(__name__)
 mysql = MySQLConnector(app, 'login_registration')
@@ -22,6 +23,12 @@ def success():
     email = request.form['email']
     password = md5.new(request.form['password']).hexdigest()
     confirm_password = md5.new(request.form['confirm_password']).hexdigest()
+
+    #trying to get dat formated when inserting into db
+    # date = strftime("%B %d %Y")
+    # print ('+++++++++++++')
+    # print date
+    # print ('+++++++++++++')
 
     #validate data and set error messages if needed
     errors = False
@@ -46,12 +53,13 @@ def success():
         return redirect('/')
     # else if valid submit to db redirect to index with flash success message promting login
     else:
-        query = "INSERT INTO users (first_name, last_name, email, password, created_at, updatrd_at) VALUES (:fName, :lName, :email, :password, NOW(), NOW())"
+        query = "INSERT INTO users (first_name, last_name, email, password, created_at, updatrd_at) VALUES (:fName, :lName, :email, :password, now(), now())"
         data = {
             'fName' : first_name,
             'lName' : last_name,
             'email' : email,
-            'password': password
+            'password': password,
+            # 'date'  : date
         }
         mysql.query_db(query, data)
         flash('successful registration, please login')
@@ -59,22 +67,23 @@ def success():
 
 @app.route('/user', methods=['POST'])
 def login():
-    print "+"* 100
     # login data
     email = request.form['email']
-    print email
     password = md5.new(request.form['password']).hexdigest()
-    print password
-    print "+"*100
     #check if login info in db
-    query = "SELECT * FROM users WHERE users.email = :email AND users.password = :password"
+    query = "SELECT first_name, last_name, DATE_FORMAT(created_at, '%W %M %e %Y') FROM users WHERE users.email = :email AND users.password = :password"
     data = {
         'email' : email,
         'password' : password
     }
     logedin_user = mysql.query_db(query, data)
+    # created_at = logedin_user[0]['created_at']
+    # print created_at
+    # converted_date = strftime(createed_at, '%b')
+
+    
     if len(logedin_user)>0:
-        message = 'hello {}, welcome to your personal page'.format(logedin_user[0]['first_name'])
+        message = 'hello {}, welcome to your personal page. You created this account on: {}'.format(logedin_user[0]['first_name'], logedin_user[0]['created_at'])
         return render_template('user_page.html', greeting=message)
     else:
         flash("login failed: email and/or password invalid please try again")
