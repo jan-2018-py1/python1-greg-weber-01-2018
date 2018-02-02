@@ -59,7 +59,6 @@ def success():
             'lName' : last_name,
             'email' : email,
             'password': password,
-            # 'date'  : date
         }
         mysql.query_db(query, data)
         flash('successful registration, please login')
