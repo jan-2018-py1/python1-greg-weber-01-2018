@@ -44,7 +44,7 @@ def success():
     if len(request.form['password']) < 8 or len(request.form['confirm_password']) < 8:
         flash('password must be at least 8 characters')
         errors = True 
-    if not password == confirm_password:
+    if password != confirm_password:
         flash("passwords don't match")
         errors = True
 
@@ -71,20 +71,15 @@ def login():
     email = request.form['email']
     password = md5.new(request.form['password']).hexdigest()
     #check if login info in db
-    query = "SELECT first_name, last_name, DATE_FORMAT(created_at, '%W %M %e %Y') FROM users WHERE users.email = :email AND users.password = :password"
+    query = "SELECT id, first_name, last_name, DATE_FORMAT(created_at, '%W %M %e %Y') as created_at FROM users WHERE users.email = :email AND users.password = :password"
     data = {
         'email' : email,
         'password' : password
     }
-    logedin_user = mysql.query_db(query, data)
-    # created_at = logedin_user[0]['created_at']
-    # print created_at
-    # converted_date = strftime(createed_at, '%b')
-
-    
-    if len(logedin_user)>0:
-        message = 'hello {}, welcome to your personal page. You created this account on: {}'.format(logedin_user[0]['first_name'], logedin_user[0]['created_at'])
-        return render_template('user_page.html', greeting=message)
+    loggedIn_user = mysql.query_db(query, data)
+    if len(loggedIn_user)>0:
+        session['uid'] = loggedIn_user[0]['id']
+        return render_template('user_page.html',user=loggedIn_user[0])
     else:
         flash("login failed: email and/or password invalid please try again")
         return redirect('/')
