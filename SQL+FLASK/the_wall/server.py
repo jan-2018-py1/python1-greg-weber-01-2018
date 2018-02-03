@@ -44,12 +44,12 @@ def register():
     if password != confirm_password:
         flash("passwords don't match")
         reg_errors = True
-    
-    # if valid insert info into db and login user to session - redirect to wall/ if not redirect to index
+
+    # if not valid redirect to index
     if reg_errors:
         session['red_class'] = 'red'
         return redirect('/')
-    # else if valid submit to db redirect to index with flash success message promting login
+    # else if valid insert intto db and redirect to wall
     query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:fName, :lName, :email, :password, now(), now())"
     data = {
         'fName' : first_name,
@@ -61,6 +61,7 @@ def register():
     session['uid'] = new_user
     session['first_name'] = first_name
     return redirect('wall')
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -74,7 +75,6 @@ def login():
         'password' : password
     }
     user = mysql.query_db(query, data)
-    
     if len(user) == 0:
         flash('email & password not found please try again or register as new user')
         session['red_class'] = 'red'
@@ -103,14 +103,15 @@ def post():
     if 'uid' not in session:
         return redirect('/')
     #grab post text from wall form and insert into db redirect to wall
-    post_message = request.form['post']
+    post = request.form['post']
+    if len(post) < 1:
+        return redirect('/wall')
     query = 'INSERT INTO posts (user_id, content, created_at, updated_at) VALUES (:uid, :content, NOW(), NOW())'
     data = {
         'uid' : session['uid'],
-        'content' : post_message
+        'content' : post
     }
-    post_message_id = mysql.query_db(query, data)  #not sure if I will need the id returned from the insert but will grab incase 
-
+    post_id = mysql.query_db(query, data)  #not sure if I will need the id returned from the insert but will grab incase 
     return redirect('/wall')
 
 
@@ -120,6 +121,8 @@ def comment():
         return redirect('/')
     # grab comment text and post id and insert into db - redirect to wall
     comment = request.form['comment']
+    if len(comment) < 1:
+        return redirect('/wall')
     post_id = request.form['post_id']
     query = "INSERT INTO comments (user_id, post_id, comment, created_at, updated_at) VALUES (:uid, :post_id, :comment, NOW(), NOW())"
     data = {
@@ -136,10 +139,7 @@ def comment():
 def delete():
     if 'uid' not in session:
         return redirect('/')
-    #add delet button to comments - if delete button pushed - check uid against comment id -allow delete if match delete from db - redirect to wall
-    #maybe flash a message saying 'you can only delete your own posts' if user id doesent match comment user id
-   
-   
+    #add delet button to comments - if delete button pushed - check uid against post id -allow delete if match delete from db - redirect to wall
     return redirect('/wall')
 
 
@@ -147,5 +147,6 @@ def delete():
 def logout():
 	session.clear()
 	return redirect("/")
+
 
 app.run(debug=True)

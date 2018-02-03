@@ -84,6 +84,9 @@ input{
     box-shadow: 2px 2px;
     color: lightgreen;
 }
+#content h4{
+    margin-left: 25px;
+}
 
 #posts{
     margin-left: 25px;
@@ -109,7 +112,9 @@ input{
     width: 600px;
     margin-left: 40px;
 }
-
+#posts h3{
+    margin-top: 90px;
+}
 
 
 h4{
