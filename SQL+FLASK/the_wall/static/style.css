@@ -1,0 +1,97 @@
+#wrapper{
+    width: 1024px;
+    padding: 20px;
+}
+
+#header{
+    border-bottom: 3px solid black;
+}
+
+#header h1{
+    display: inline-block;
+    width: 200px;
+}
+
+#header h3{
+    display: inline-block;
+    width: 200px;
+    margin-left: 500px;
+}
+
+#header a{
+    display: inline-block;
+}
+
+#register{
+    height: 270px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 50px 0 0 25px;
+    border: 1px solid black;
+    width: 166px;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+#login{
+    height: 200px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 50px 0 0 25px;
+    border: 1px solid black;
+    width: 166px;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+#errors{
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 50px 0 0 25px;
+    width: 166px;
+    padding: 10px;
+    color:red;
+}
+#errors ul{
+    padding: 20px;
+    margin: 0px;
+}#errors li{
+    margin-bottom: 10px;
+}
+.red{
+    border: 1px solid red;
+    border-radius: 5px;
+}
+input{
+    margin: 3px;
+    padding:5px;
+    border-radius: 5px;
+}
+
+.submit{
+    box-shadow: 2px 2px;
+}
+
+#content{
+    padding:40px;
+}
+
+.post_submit{
+    box-shadow: 2px 2px;
+    color: lightgreen;
+}
+
+#posts{
+    margin-left: 25px;
+    margin-top: 15px;
+    padding: 15px; 
+}
+
+#posts p{
+    margin: 0px 0px 50px 20px;
+}
+
+#comment{
+    margin-left: 600px;
+}
