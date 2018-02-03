@@ -13,7 +13,7 @@ app.secret_key = '876dsf87ysuid'
 
 @app.route('/')
 def index():
-    if 'uid' in session:
+    if 'u_id' in session:
         return redirect ('/wall')
     return render_template('index.html')
 
@@ -50,15 +50,15 @@ def register():
         session['red_class'] = 'red'
         return redirect('/')
     # else if valid insert intto db and redirect to wall
-    query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:fName, :lName, :email, :password, now(), now())"
+    query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:f_name, :l_name, :email, :password, now(), now())"
     data = {
-        'fName' : first_name,
-        'lName' : last_name,
+        'f_name' : first_name,
+        'l_name' : last_name,
         'email' : email,
         'password': password,
     }
     new_user = mysql.query_db(query, data)
-    session['uid'] = new_user
+    session['u_id'] = new_user
     session['first_name'] = first_name
     return redirect('wall')
 
@@ -79,14 +79,14 @@ def login():
         flash('email & password not found please try again or register as new user')
         session['red_class'] = 'red'
         return redirect('/')
-    session['uid'] = user[0]['id']
+    session['u_id'] = user[0]['id']
     session['first_name'] = user[0]['first_name']
     return redirect('wall')
 
 
 @app.route('/wall')
 def wall_display():
-    if 'uid' not in session:
+    if 'u_id' not in session:
         return redirect('/')
     #querry all posts and store in []
     posts_query = "SELECT users.id as poster_user_id, users.first_name as poster_name, posts.content as post, posts.id as post_id, DATE_FORMAT(posts.created_at, '%M %e, %Y %h:%i %p') as post_date from users join posts on users.id = posts.user_id order by posts.id DESC"
@@ -100,15 +100,15 @@ def wall_display():
 
 @app.route('/posts', methods=['POST'])
 def post():
-    if 'uid' not in session:
+    if 'u_id' not in session:
         return redirect('/')
     #grab post text from wall form and insert into db redirect to wall
     post = request.form['post']
     if len(post) < 1:
         return redirect('/wall')
-    query = 'INSERT INTO posts (user_id, content, created_at, updated_at) VALUES (:uid, :content, NOW(), NOW())'
+    query = 'INSERT INTO posts (user_id, content, created_at, updated_at) VALUES (:u_id, :content, NOW(), NOW())'
     data = {
-        'uid' : session['uid'],
+        'u_id' : session['u_id'],
         'content' : post
     }
     post_id = mysql.query_db(query, data)  #not sure if I will need the id returned from the insert but will grab incase 
@@ -117,16 +117,16 @@ def post():
 
 @app.route('/comment', methods=['POST'])
 def comment():
-    if 'uid' not in session:
+    if 'u_id' not in session:
         return redirect('/')
     # grab comment text and post id and insert into db - redirect to wall
     comment = request.form['comment']
     if len(comment) < 1:
         return redirect('/wall')
     post_id = request.form['post_id']
-    query = "INSERT INTO comments (user_id, post_id, comment, created_at, updated_at) VALUES (:uid, :post_id, :comment, NOW(), NOW())"
+    query = "INSERT INTO comments (user_id, post_id, comment, created_at, updated_at) VALUES (:u_id, :post_id, :comment, NOW(), NOW())"
     data = {
-        'uid' : session['uid'],
+        'u_id' : session['u_id'],
         'post_id' : post_id,
         'comment' : comment
     }
@@ -137,9 +137,9 @@ def comment():
 
 @app.route('/delete', methods=['POST'])
 def delete():
-    if 'uid' not in session:
+    if 'u_id' not in session:
         return redirect('/')
-    #add delet button to comments - if delete button pushed - check uid against post id -allow delete if match delete from db - redirect to wall
+    #add delet button to comments - if delete button pushed - check u_id against post id -allow delete if match delete from db - redirect to wall
     return redirect('/wall')
 
 
