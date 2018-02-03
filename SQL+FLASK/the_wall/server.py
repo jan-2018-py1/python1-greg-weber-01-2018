@@ -88,15 +88,14 @@ def login():
 def wall_display():
     if 'uid' not in session:
         return redirect('/')
-    #querry all posts/comments and render 'wall.html'- most recent post first, oldest comment first
-    query = "select posts.id as post_id, users.first_name, posts.content, DATE_FORMAT(posts.created_at, '%W %M %e %Y') as created_at FROM users JOIN posts ON users.id = posts.user_id ORDER BY  posts.created_at DESC"
-    posts = mysql.query_db(query)
-    print '--'*50
-    print posts[0]
-    print '--'*50
-    return render_template('wall.html', posts=posts)
+    #querry all posts and store in []
+    posts_query = "SELECT users.id as poster_user_id, users.first_name as poster_name, posts.content as post, posts.id as post_id, DATE_FORMAT(posts.created_at, '%M %e, %Y %h:%i %p') as post_date from users join posts on users.id = posts.user_id order by posts.id DESC"
+    posts = mysql.query_db(posts_query)
 
-
+    # query comments and store in []
+    comments_query = "SELECT users.id as commenter_id, users.first_name as commenter_name, comments.comment,  comments.post_id, DATE_FORMAT(comments.created_at, '%M %e, %Y %h:%i %p') as comment_date from users join comments on users.id = comments.user_id"
+    comments = mysql.query_db(comments_query)
+    return render_template('wall.html', posts=posts, comments=comments)
 
 
 @app.route('/posts', methods=['POST'])
@@ -115,24 +114,20 @@ def post():
     return redirect('/wall')
 
 
-
-
 @app.route('/comment', methods=['POST'])
 def comment():
     if 'uid' not in session:
         return redirect('/')
+    # grab comment text and post id and insert into db - redirect to wall
     comment = request.form['comment']
-    print comment
     post_id = request.form['post_id']
-    print post_id
-    # print '--'*50
-    # print post_id
-    # print '--'*50
-    # # grab comment text and insert into db - redirect to wall
-
-  
-
-
+    query = "INSERT INTO comments (user_id, post_id, comment, created_at, updated_at) VALUES (:uid, :post_id, :comment, NOW(), NOW())"
+    data = {
+        'uid' : session['uid'],
+        'post_id' : post_id,
+        'comment' : comment
+    }
+    comment_id = mysql.query_db(query, data)
     return redirect('/wall')
 
 

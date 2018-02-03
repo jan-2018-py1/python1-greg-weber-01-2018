@@ -23,8 +23,14 @@
         </div>
         <div id="posts">
             {% for post in posts %}
-                <h3>{{post.first_name}} - {{post.created_at}}</h3>
-                <p>{{post.content}}</p>
+                <h3>{{post.poster_name}} - {{post.post_date}}</h3>
+                <p class='post_class'>{{post.post}}</p>
+                {% for comment in comments %}
+                    {% if (comment.post_id == post.post_id) %}
+                        <h4>{{comment.commenter_name}} - {{comment.comment_date}}</h4>
+                        <p class='comment_class'>{{comment.comment}}</p>
+                    {% endif %}
+                {% endfor %}
                 <form action="/comment" method='post'>
                     <input type="hidden" name="post_id" value={{post.post_id}} />
                     <textarea name="comment" cols="50" rows="2" placeholder='leave a comment'></textarea>

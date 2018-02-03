@@ -1,3 +1,4 @@
+
 #wrapper{
     width: 1024px;
     padding: 20px;
@@ -56,7 +57,9 @@
 #errors ul{
     padding: 20px;
     margin: 0px;
-}#errors li{
+}
+
+#errors li{
     margin-bottom: 10px;
 }
 .red{
@@ -88,10 +91,27 @@ input{
     padding: 15px; 
 }
 
-#posts p{
-    margin: 0px 0px 50px 20px;
+#posts .post_class{
+    margin: 0px 0px 30px 25px;
 }
 
-#comment{
-    margin-left: 600px;
+#posts .comment_class{
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+
+#posts form{
+    margin-left: 200px;
+    width: 600;
+}
+
+#posts textarea{
+    width: 600px;
+    margin-left: 40px;
+}
+
+
+
+h4{
+    margin: 0px 0px 5px 80px;
 }
