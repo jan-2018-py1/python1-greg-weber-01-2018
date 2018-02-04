@@ -25,34 +25,34 @@ def new():
     return render template('users_new.html')
 
 
-@app.route("/users/<session['u_id']>/edit")
+@app.route('/users/<id>/edit')
 def edit():
     # render form to edit profile based on logged-in user
     return render_template('users_edit.html')
 
 
-@app.route("/users/<session['u_id']>")
+@app.route('/users/<id>')
 def show():
-    #display user profile using sessions['u_id'] us reference
+    #display user profile using id us reference
     return render_template('user_show.html')
 
 
 @app.route('/users/create', methods=['POST'])
 def create():
     # pull info from new user form and insert into db
-    returnb redirect("/users/<session['u_id']>")
+    returnb redirect('/users/<id>')
 
 
-@app.route("/user/<session['u_id']>/destroy")
+@app.route("/user/<id>/destroy")
 def detroy():
     # delete given user by id from db
     return redirect('/users')
 
 
-@app.route("user/update/<session['u_id']>")
+@app.route('user/update/<id>')
 def update():
     # update query info in user profile on db with info rom form on user edit page
-    return redirect("/users/<session['u_id']>")
+    return redirect('/users/<id>')
 
 
 app.run(debug=True)
