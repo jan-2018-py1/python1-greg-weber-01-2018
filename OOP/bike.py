@@ -23,7 +23,7 @@ class Bike(object):
         return self
 
     def reverse(self):
-        if self.miles <= 5:
+        if self.miles < 5:
             print "you're not allowed to have negative mileage - try riding forward!!"
             return self
         miles_ridden = self.miles = self.miles - 5
