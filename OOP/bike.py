@@ -15,7 +15,6 @@ class Bike(object):
         print "Total forward progress:", self.miles, 'miles'
         return self
 
-
     def ride(self):
         miles_ridden = self.miles = self.miles + 10
         print "Riding"
@@ -35,7 +34,6 @@ class Bike(object):
 gregs_bike = Bike(4500, '40mph')
 bobbys_bike = Bike(2750, '33mph')
 kristins_bike = Bike(900, '11mph')
-
 # chaining methods of bike class to instances
 print "Greg's Bike:"
 gregs_bike.ride().ride().ride().reverse().display_info()
