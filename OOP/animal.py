@@ -31,6 +31,7 @@ class Dragon(Animal):
         super(Dragon, self).__init__(name)
         self.health = 170
     def display_health(self):
+        super(Dragon, self).display_health()
         print 'I am a dragon named the mighty {}'.format(self.name)
         return self
     def fly(self):
@@ -40,10 +41,10 @@ class Dragon(Animal):
 
 
 x = Dog('Tanner')
-print x.walk().walk().walk().display_health().run().run().pet().display_health()
+print x.walk().walk().walk().run().run().pet().display_health()
 
 y = Dragon('Puff')
-print y.fly().run().fly().display_health().health
+print y.fly().run().fly().display_health()
 
 
 z = Animal('horse')
