@@ -38,7 +38,7 @@ class Product(object):
 x = Product(1500, 'computer', '2', 'Apple')
 y = Product(7, 'Bannanas', '2', 'Dole')
 z = Product(749, 'iphone', '.67', 'Apple')
-x.add_tax(.08).display_info().sell().display_info().return_item('opened box')
+x.add_tax(.08).display_info().sell().display_info().return_item('opened')
 print '*'*50
 y.add_tax(.093).display_info().sell().display_info().return_item('new in box')
 print '*'*50
