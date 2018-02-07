@@ -44,3 +44,7 @@ print x.walk().walk().walk().display_health().run().run().pet().display_health()
 
 y = Dragon('Puff')
 print y.fly().run().fly().display_health().health
+
+
+z = Animal('horse')
+print z.display_health().run().walk().display_health() 
