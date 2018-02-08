@@ -26,8 +26,8 @@ class Hospital(object):
             self.bed_num = self.bed_nums[0]
             #a dict to hold all the new patient info and hospital bed number
             new_patient = {
-                'patient' : Patient(id, name, allergies), #creating a new instance of Patient here
-                'bed_num' : self.bed_num
+                'patient_info' : Patient(id, name, allergies), #creating a new instance of Patient here
+                'bed_num' : self.bed_num  #this is from the hospital class so we are really tying the two together here.
                 }
             self.patients_list.append(new_patient)
             # remove bed num from list of available because just used it
@@ -41,7 +41,7 @@ class Hospital(object):
 
     def discharge(self, name):
         for patient in self.patients_list:
-            if patient['patient'].name == name:
+            if patient['patient_info'].name == name:
                 idx = self.patients_list.index(patient) #grab index in list of patients of patient to be removed
                 self.bed_nums.append(patient['bed_num'])
                 self.empty_beds += 1
@@ -53,9 +53,9 @@ class Hospital(object):
         print 'Currently at', self.name
         print ' - -' * 10
         for patient in self.patients_list:
-            print 'patient name:', patient['patient'].name
+            print 'patient name:', patient['patient_info'].name
             print 'bed #:', patient['bed_num']
-            print 'allergies:', patient['patient'].allergies
+            print 'allergies:', patient['patient_info'].allergies
             print ' - -' *10
         print '{} empty bed(s) until {} is at capacity'.format(self.empty_beds, self.name)
         print '=='* 40
