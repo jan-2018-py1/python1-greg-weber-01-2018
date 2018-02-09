@@ -1,0 +1,25 @@
+#container{
+    padding:20px;
+    text-align: center;
+}
+
+h3{
+    color: blue;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+h1{
+    color: blue;
+    width: 350px;
+    box-shadow: 1px 1px;
+    border: 1px solid blue;
+    margin: 20px auto;
+}
+
+input{
+    margin-top: 10px;
+    color: blue;
+    box-shadow: 1px 1px;
+    border: 1px solid blue;
+}
