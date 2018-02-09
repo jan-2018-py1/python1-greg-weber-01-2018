@@ -3,6 +3,6 @@ from time import gmtime, strftime, localtime
 
 def index(request):
   context = {
-  "time": strftime("%b %d, %I:%M %p", localtime())
+  "time": strftime("%b %d, %Y %I:%M %p", localtime())
   }
   return render(request,'curr_time/index.html', context)
