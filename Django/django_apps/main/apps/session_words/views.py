@@ -7,23 +7,25 @@ def index(request):
 
 
 def add(request):
-    #use a list to hold dicts of data for each submit
+   # use a list to hold dicts of data for each submit
     if 'data' not in request.session:
         request.session['data'] = []
-    #setting a var for fontsize from the checkbox field
-    
-    print request.POST['big_font']
-   
     new_word_data = {
         'word' :  request.POST['word'],
         'color' : request.POST['color'],
-        'big_font' : request.POST['big_font']
     }
+    #setting a var state for fontsize from the checkbox field
+    if 'big_font' not in request.POST:
+        new_word_data['big_font'] = 'off'
+    else:
+        new_word_data['big_font'] = 'on'
     #append new data
     request.session['data'].append(new_word_data)
-    print request.session['data']
+    #print request.session['data']
+    for data in request.session['data']:
+        print data['word'], data['color']
     return redirect('/session_words')
 
 def clear(request):
-    # request.session.clear()
+    request.session.clear()
     return redirect('/session_words')
