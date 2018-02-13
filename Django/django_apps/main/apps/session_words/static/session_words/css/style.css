@@ -1,0 +1,19 @@
+#input_field{
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 50%;
+    border-right: 1px solid black;
+}
+
+input{
+    margin: 8px;
+}
+
+.green{
+    color: green;
+}
+
+.on{
+    font-size: 25px;
+}
