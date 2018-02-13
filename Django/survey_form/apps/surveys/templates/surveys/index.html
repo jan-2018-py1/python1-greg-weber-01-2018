@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'surveys/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+
+</head>
+<body>
+    <center>
+        <div id="survey_wrapper">
+            <form action="/surveys/process" method='post'>
+                {% csrf_token %}
+                <p>Survey:</p>
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <input type="text" name="name" placeholder="your name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Location:</td>
+                        <td> 
+                            <select name="location" placeholder='location'>
+                                <option value="Seattle">Seattle</option>
+                                <option value="San Jose">San Jose</option>
+                                <option value="online">online</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Language:</td>
+                        <td>
+                            <select name="language" placeholder='favorite language'>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Python">Python</option>
+                                    <option value="c++">c++</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comment:</td>
+                    </tr>
+                    <tr>
+                        <td><textarea name="comment" id="comment" cols="30" rows="10" placeholder='leave an optional comment'></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit"></tr>  </td>
+                    </tr>          
+                </table>
+            </form>
+        </div>
+    </center>
+</body>
+</html>

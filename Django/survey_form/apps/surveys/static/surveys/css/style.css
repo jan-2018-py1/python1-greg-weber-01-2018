@@ -1,0 +1,48 @@
+*{
+    color: rgb(0, 79, 226);
+}
+#survey_wrapper{
+    margin-top: 50px;
+    padding: 75px;
+    width: 420px;
+    border: 1px solid lightblue;
+    box-shadow: 2px 2px;
+    box-shadow: 1px 1px;
+}
+
+form input, form textarea, form submit, form select{
+    padding: 5px;
+    margin: 5px;
+}
+
+#greeting{
+    background-color: lightgreen;
+    border: 1px solid lightblue;
+    width: 600PX;
+    margin: 20px;
+    box-shadow: 1px 1px;
+}
+
+
+#result_content{
+    width: 600px;
+    border: 1px solid lightblue;
+    box-shadow: 1px 1px;
+}
+               
+#result_content h3{
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid lightblue;
+}
+
+#result_content table{
+    margin: 50px;
+    width: 100%;
+}
+
+input, textarea{
+    border: solid 1px lightskyblue;
+    box-shadow: 1px 1px;
+}
