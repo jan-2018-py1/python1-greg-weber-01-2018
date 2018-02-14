@@ -19,17 +19,17 @@
             <input type="radio" name="color" value="green"> green<br>
             <input type="radio" name="color" value="blue"> blue<br>
             <input type="checkbox" name="big_font" value="big_font"><span>show in Big fonts!</span><br>
-            <input type="submit" value="Add to Session">
+            <input type="submit" value="Add to Session" id='add_button'>
         </form>
    </div>
    <div id="results">
-        {% for data in request.session.data %}
-            <p class="{{ data.color }} {{ data.big_font }}"> {{ data.word }}</p>
-        {% endfor %}
         <form action="/session_words/clear" method='post'>
             {% csrf_token %}
-            <input type="submit" name="clear" value='clear session'>
+            <input type="submit" name="clear" value='clear session' id='clear_button'>
         </form>
+        {% for data in request.session.data %}
+            <p class="{{ data.color }} {{ data.big_font }}"> {{ data.word }} <span class ='plane_text'> {{data.time}} </span></p>
+        {% endfor %}
    </div>
 </body>
 </html>
