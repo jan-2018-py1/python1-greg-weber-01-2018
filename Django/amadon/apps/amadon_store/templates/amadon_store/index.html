@@ -25,12 +25,14 @@
                     <th scope="row">Acoustic Guitar</th>
                     <td>$4,995</td>
                     <td>
-                        <form action="amadon_store/buy" method=post>
+                        <form action="amadon/buy" method="post">
+                            {% csrf_token %}
                             <select name="quantity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
                             </select>
+                            <input type='hidden' name='product_id' value='1020'/>
                             <input type="submit" value="buy">
                         </form>
                     </td>
@@ -39,26 +41,30 @@
                     <th scope="row">Electric Guitar</th>
                     <td>$2,650</td>
                     <td>
-                        <form action="amadon_store/buy" method=post>
+                        <form action="amadon/buy" method="post">
+                            {% csrf_token %}
                             <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
                             </select>
+                            <input type='hidden' name='product_id' value='1005'/>
                             <input type="submit" value="buy">
                         </form>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">Electric Bass</th>
+                    <th scope="row">Bass</th>
                     <td>$2900</td>
                     <td>
-                        <form action="amadon_store/buy" method=post>
+                        <form action="amadon/buy" method="post">
+                            {% csrf_token %}
                             <select name="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
                             </select>
+                            <input type='hidden' name='product_id' value='1074'/>
                             <input type="submit" value="buy">
                         </form>
                     </td>
