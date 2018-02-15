@@ -36,8 +36,11 @@ def buy(request):
     request.session['order_total'] = order_total
     request.session['grand_total'] += order_total
     request.session['total_number_orders'] += 1
+
+   
+
     return redirect('/amadon/checkout')
 
 
 def checkout(request):
-    return render(request, 'amadon_store/checkout.html')
+    return render(request, 'amadon_store/checkout.html', request.session)

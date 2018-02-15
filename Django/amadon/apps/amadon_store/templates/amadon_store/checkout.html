@@ -10,9 +10,9 @@
 </head>
 <body>
     <div id="checkout_wrapper">
-        <h3>Thank you for your purchace of : {{request.session.item}}(s)</h3>
-        <p>we charged your credit card for ${{request.session.order_total}}</p>
-        <p>you have ordered {{request.session.total_number_orders}} times so far and spent ${{request.session.grand_total}} from Amadon.com</p>
+        <h3>Thank you for your purchace of : {{item}}(s)</h3>
+        <p>we charged your credit card for ${{order_total}}</p>
+        <p>you have ordered {{total_number_orders}} times so far and spent ${{grand_total}} from Amadon.com</p>
         <a href="/amadon">go back</a>
     </div>
 </body>
