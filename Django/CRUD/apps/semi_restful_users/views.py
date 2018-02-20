@@ -1,8 +1,14 @@
 from django.shortcuts import render, HttpResponse, redirect
+from .models import *
 
 # Create your views here.
 def index(req):
-    return render(req, 'semi_restful_users/index.html')
+    users = User.objects.all()
+    context = {
+        'users': users
+    }
+
+    return render(req, 'semi_restful_users/index.html', context)
 
 
 def new(req):

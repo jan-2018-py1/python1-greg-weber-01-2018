@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^users/(?P<id>\d+)$', views.show),
     url(r'^users/create$', views.create),
     url(r'^users/(?P<id>\d+)/destroy$', views.destroy),
-    (r'^users/update$', views.update)
+    url(r'^users/update$', views.update)
 ]
