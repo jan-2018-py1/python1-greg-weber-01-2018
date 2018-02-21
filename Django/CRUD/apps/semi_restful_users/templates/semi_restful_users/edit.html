@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form action='/users/{{this_user.id}}' method='post'>
+        <form action='/users/update' method='post'>
             {% csrf_token%}
             <div class="form-group">
                 <label for="name">Name:</label>
