@@ -12,18 +12,28 @@
 <body>
     <div class="container" style="border:1px solid black; border-radius:5px; margin-top:30px">
         <h2>Add a new course:</h2>
-        <form action='/users/update' method='post'>
+        <form action='/courses/create' method='post'>
             {% csrf_token%}
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" name="name">
             </div>
             <div class="form-group">
-                <label for="email">Description:</label>
+                <label for="description">Description:</label>
                 <textarea name="description"  class="form-control"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="background-color:green">add</button>
         </form><br>
+        {% if messages %}
+        <ul class="messages" style='color:red'>
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
     </div>  
     <br>
     <div class="container">
@@ -42,7 +52,7 @@
                     {% for course in courses %}
                     <tr>
                         <th scope="row">{{course.name}}</th>
-                        <td>{{course.description}}</td>
+                        <td>{{course.description.summary}}</td>
                         <td>{{course.created_at}}</td>
                         <td>
                            <a href="courses/destroy/{{course.id}}">delete</a>
