@@ -3,6 +3,8 @@ from .models import *
 
 # Create your views here.
 def index(req):
+    if 'uesr_id' not in req.session:
+        req.session['user_id'] = ""
     users = User.objects.all()
     print 'users:', users
     context = {
@@ -14,8 +16,7 @@ def new(req):
     return render(req, 'semi_restful_users/new.html')
 
 def edit(req, id):
-    if 'user_id' not in req.session:
-        req.session['user_id'] = id
+    req.session['user_id'] = id
     user = User.objects.get(id=id)
     context = {
         'this_user': user
@@ -47,6 +48,7 @@ def update(req):
     user.email = req.POST['email']
     user.save()
     url = '/users/{}'.format(user.id)
+    req.session.clear()
     return redirect(url)
 
 
