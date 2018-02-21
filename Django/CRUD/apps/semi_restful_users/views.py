@@ -46,8 +46,7 @@ def update(req):
     user.name = req.POST['name']  
     user.email = req.POST['email']
     user.save()
-    user_id = req.session['user_id']
-    url = '/users/{}'.format(user_id)
+    url = '/users/{}'.format(user.id)
     return redirect(url)
 
 
