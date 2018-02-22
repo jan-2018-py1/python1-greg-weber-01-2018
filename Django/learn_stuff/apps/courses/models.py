@@ -5,6 +5,9 @@ from django.db import models
 class CourseManager(models.Manager):
     def validator(self, postData):
         errors = {}
+        for key in postData:
+            if postData[key] == '':
+                errors['empty_fields'] = 'All input fields must be filled'
         if len(postData['name']) < 6:
             errors['name'] = "Course name must longer than 5 characters"
         if len(postData['description']) < 16:
