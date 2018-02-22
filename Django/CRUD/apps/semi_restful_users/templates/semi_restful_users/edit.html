@@ -13,11 +13,11 @@
             {% csrf_token%}
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" name="name" placeholder="{{this_user.name}}">
+                <input type="text" class="form-control" name="name" value="{{this_user.name}}">
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" name="email" class="form-control" placeholder="{{this_user.email}}">
+                <input type="text" name="email" class="form-control" value="{{this_user.email}}">
             </div>
             <button type="submit" class="btn btn-primary">update user</button>
             </form><br>
