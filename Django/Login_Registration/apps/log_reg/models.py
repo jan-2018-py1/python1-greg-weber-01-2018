@@ -35,16 +35,19 @@ class UserManager(models.Manager):
 
     def login_validator(self, postData):
         errors = {}
+        for key in postData:
+            if postData[key] == '':
+                errors['empty_fields'] = 'All input fields must be filled'
+                return errors
+        
         # find user in db
         this_user = User.objects.filter(email=postData['email']) #returns a queryset
-        print postData['password']
-        print bcrypt.hashpw(postData['password'].encode(), bcrypt.gensalt())
-        print this_user[0].password
-        print this_user[0].first_name
-        print bcrypt.hashpw('11111111'.encode(), bcrypt.gensalt())
-        print bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode())
 
-        if not bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode()):
+        #this try and except is covers the case that the user info is not in the db since the filter query about could return an empty set...
+        try:
+            if not bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode()):
+                errors['login_fail'] = 'user info does not match data base - please try again or register'
+        except:
             errors['login_fail'] = 'user info does not match data base - please try again or register'
         return errors
 

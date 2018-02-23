@@ -32,8 +32,8 @@ def create(req):
         return redirect('/success')
 
 def login(req):
-    # check if info matches in db and redirect to show or error 
-    #will return a dict of errors or a user id
+    # use login_validator method to check if info matches in db, then redirect to show or error messages to index
+    
     errors = User.objects.login_validator(req.POST)
     if len(errors):
         for tag, error in errors.iteritems():
