@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login | Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" style='border:1px solid green; border-radius:5px; width:600px; margin-top:20px'>
+        <h4>Register:</h4>
+        <form action='/create' method='post'>
+            {% csrf_token%}
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" name="last_name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="text" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="text" class="form-control" name="confirm_password">
+            </div>    
+            <button type="submit" class="btn btn-primary" style="background-color:green">register</button>
+        </form><br>
+        {% if messages %}
+        <ul class="messages" style='color:red'>
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>  
+
+    <div class="container" style='border:1px solid green; border-radius:5px; width:600px; margin-top:20px'>
+        <h4>Login:</h4>
+        <form action='/login' method='post'>
+            {% csrf_token%}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="text" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:green">Login:</button>
+        </form><br>
+    </div>  
+</body>
+</html>
