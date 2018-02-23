@@ -18,13 +18,13 @@ def add(request):
         "time": strftime("%b %d, %Y %I:%M %p")
     }
     #set a var for font size from the checkbox field
-    try:
-        request.post["big_font"]
-        new_word_data["big_font"] = "on"
-    except:
-        pass
+    # try:
+    #     request.post["big_font"]
+    #     new_word_data["big_font"] = "on"
+    # except:
+    #     pass
     if 'big_font' not in request.POST:
-        new_word_data['big_font'] = 'off'
+        pass
     else:
         new_word_data['big_font'] = 'on'
     # new_word_data = 'big_font' not in request.POST ? "off" : "on"
