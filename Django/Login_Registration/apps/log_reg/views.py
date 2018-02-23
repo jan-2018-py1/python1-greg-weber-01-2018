@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponse, redirect
 from models import *
 from django.contrib import messages
 
-
 def index(req):
     #render the index page with log/reg forms
     if 'user_id' not in req.session:
@@ -13,10 +12,8 @@ def show(req):
     # show user name and sucess message use session user_id
     return render(req, 'log_reg/success.html', req.session)
 
-
 def create(req):
     # validate/create user, login user into session and redirect to show upon success or redirect with errors 
-    
     errors = User.objects.reg_validator(req.POST)
     if len(errors):
         for tag, error in errors.iteritems():
@@ -27,7 +24,6 @@ def create(req):
         first_name = req.POST['first_name']
         last_name = req.POST['last_name']
         email = req.POST['email']
-
         password = User.objects.password_hasher(req.POST['password']) #hashes pwd in models
         new_user = User.objects.create(first_name=first_name, last_name=last_name, email=email, password=password)
         #login to sessions
@@ -43,10 +39,12 @@ def login(req):
         for tag, error in errors.iteritems():
             messages.error(req, error, extra_tags=tag)
         return redirect('/')    
-    else:
+    else: #log user into session
+        this_user = User.objects.get(email=req.POST['email'])
+        req.session['user_id'] = this_user.id
+        req.session['name'] = this_user.first_name
         return redirect('/success')
         
-
 def logout(req):
     req.session.clear()
     return redirect('/')

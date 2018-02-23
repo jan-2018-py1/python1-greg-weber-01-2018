@@ -11,6 +11,12 @@ class UserManager(models.Manager):
         for key in postData:
             if postData[key] == '':
                 errors['empty_fields'] = 'All input fields must be filled'
+        #querry a user object with the post email to see if it already exists in th edb
+        try: 
+            if User.objects.get(email=postData['email']):
+                errors['not_unique'] = 'There is already a user with this email, please login.'
+        except:
+            pass
         if not postData['first_name'].isalpha() or len(postData['first_name']) < 2:
             errors['first_name'] = "First name must longer than 2 characters and contain no numbers"   
         if not postData['last_name'].isalpha() or len(postData['last_name']) < 2:
@@ -24,7 +30,7 @@ class UserManager(models.Manager):
         return errors
     
     def password_hasher(self, pwd):
-        password = bcrypt.hashpw('pwd'.encode(), bcrypt.gensalt())
+        password = bcrypt.hashpw(pwd.encode(), bcrypt.gensalt())
         return password
 
     def login_validator(self, postData):
@@ -32,7 +38,10 @@ class UserManager(models.Manager):
         # find user in db
         this_user = User.objects.filter(email=postData['email']) #returns a queryset
         print postData['password']
+        print bcrypt.hashpw(postData['password'].encode(), bcrypt.gensalt())
         print this_user[0].password
+        print this_user[0].first_name
+        print bcrypt.hashpw('11111111'.encode(), bcrypt.gensalt())
         print bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode())
 
         if not bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode()):
