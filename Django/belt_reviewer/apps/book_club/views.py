@@ -6,11 +6,11 @@ def index(req):
     # grab user from DB using session id
     user = User.objects.get(id=req.session['user_id'])
     #grab all reviews
-    all_reviews = Review.objects.all()
-    last_3 = all_reviews.order_by('-id')[:3]
+    all_books = Book.objects.all()
+    last_3 = Review.objects.all().order_by('-id')[:3]
     context = {
         'alias' : user.alias,
-        'all_reviews': all_reviews,
+        'all_books': all_books,
         'recent_reviews': last_3
     }
     return render(req, 'book_club/user_dashboard.html', context)
@@ -35,8 +35,12 @@ def review_new(req):
 
 
 def book_show(req, id):
-    # query spacific book info
-    this_book = Book.objects.get(id=id)
+    # query spacific book info - id someone types a fake id into url this will catch it
+    if Book.objects.filter(id=id).exists():
+        this_book = Book.objects.get(id=id)
+    else:
+        return redirect('/')
+
     all_books = Book.objects.all()
     
     context = {
@@ -50,7 +54,11 @@ def book_show(req, id):
     return render(req, 'book_club/review.html', context)
 
 def user_reviews(req, id):
-    user = User.objects.get(id=id)
+    if User.objects.filter(id=id).exists():
+        user = User.objects.get(id=id)
+    else:
+        return redirect('/')
+    #number of reviews by this user
     review_count = len(user.reviews.all())
     reviewed_books = user.reviews.all()
     context = {
@@ -90,7 +98,8 @@ def review_create(req):
     return redirect(url)
 
 def review_destroy(req, id):
-    #delete book review and redirect
-    this_review = Review.objects.get(id=id)
-    this_review.delete()
+    if Review.objects.filter(id=id).exists():
+        #delete book review and redirect
+        this_review = Review.objects.get(id=id)
+        this_review.delete()
     return redirect('/books')

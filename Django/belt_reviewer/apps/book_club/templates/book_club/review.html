@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>{{this_book}}</h2>
-    <p><a style='margin-left:10px' href="/books">Home</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p>  
+    <p style='margin-right:200px; text-align:right'><a  href="/books">Home</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p>  
     <div id='reviews' style="display:inline-block; width:400px; margin:20px">
         <h3>Reviews:</h3>
         <div>
@@ -23,7 +23,7 @@
             {% endfor %}
         </div>
     </div>
-    <div style="width:300px; margin-left:20px; display:inline-block; vertical-align:top">
+    <div style="width:200px; margin-left:50px; display:inline-block; vertical-align:top">
         <h3>Add a review</h3>
         <form action="/review/new" method='post'>
             {% csrf_token%}
@@ -44,8 +44,6 @@
             <input type="hidden" name="book_id" value='{{book_id}}'> 
             <button type="submit" class="btn btn-primary" style="background-color:green">Add Book</button>
         </form>
-    </div>
-    
-    
+    </div> 
 </body>
 </html>
