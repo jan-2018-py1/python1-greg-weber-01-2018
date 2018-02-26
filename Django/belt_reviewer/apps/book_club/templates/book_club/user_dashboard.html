@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Club | Book List</title>
+</head>
+<body>
+    <div style='margin:20px'>
+        <h2>Welcome {{alias}}</h2>
+        <p style="text-align:right; margin-right:30px"><a style='margin-left:10px' href="/books/add">Add a book</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p> 
+    </div>
+    <div style='margin-left:30px; display:inline-block'>
+        <h3>Recent Book Reviews</h3>
+        <div style="margin-left:10px">
+            {% for review in recent_reviews %}
+            <h3><a href="/books/{{review.book.id}}">{{review.book.title}}</a></h3>
+            <div style='margin-left:10px'>
+                <p>Rating: {{review.stars}} stars(s)</p>
+                <p><a href="/users/{{review.user.id}}">{{review.user.alias}}</a> says: {{review.content}}</p>
+                <p>Posted on: {{review.created_at}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div style='display:inline-block; width:200px; vertical-align:top; margin-left:300px'>
+        <h3>Other Books with reviews: scroll down for more...</h3>
+        <div style='text-align:center; border:1px solid black; height:150px; overflow:scroll'>
+            {% for book in all_reviews %}
+            <p><a href="/books/{{book.book.id}}">{{book.book.title}}</a></p>
+            {% endfor%}
+        </div>
+    </div>    
+</body>
+</html>

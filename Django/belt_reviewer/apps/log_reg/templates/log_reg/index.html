@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login | Register</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container" style='border:1px solid green; border-radius:5px; width:600px; margin-top:20px'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login | Register</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+                <h4 style='margin:20px'><a href="http://www.animatedimages.org/cat-stars-280.htm"><img src="http://www.animatedimages.org/data/media/280/animated-star-image-0109.gif" border="0" alt="animated-star-image-0109" /></a>Welcome to Book Club<a href="http://www.animatedimages.org/cat-stars-280.htm"><img src="http://www.animatedimages.org/data/media/280/animated-star-image-0109.gif" border="0" alt="animated-star-image-0109" /></a></h4>  
+            <div class="container" style='display:inline-block;vertical-align:top; margin:20px; border:1px solid green; border-radius:5px; width:300px'>
         <h4>Register:</h4>
         <form action='/create' method='post'>
             {% csrf_token%}
@@ -49,8 +51,8 @@
         </ul>
         {% endif %}
     </div>  
-
-    <div class="container" style='border:1px solid green; border-radius:5px; width:600px; margin-top:20px'>
+    <span style='font-size:30px'>or...</span>
+    <div class="container" style='margin:20px; display:inline-block; border:1px solid green; border-radius:5px; width:300px'>
         <h4>Login:</h4>
         <form action='/login' method='post'>
             {% csrf_token%}
@@ -65,5 +67,6 @@
             <button type="submit" class="btn btn-primary" style="background-color:green">Login:</button>
         </form><br>
     </div>  
+</div>
 </body>
 </html>

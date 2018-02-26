@@ -5,14 +5,24 @@ from ..log_reg.models import User
 
 
 # one author can have many books 
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return self.name
+
+
 class Book(models.Model):
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, related_name = "books")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
     def __str__(self):
         return self.title
+
 
 #one book can have many reviews and one user can write many reviews
 class Review(models.Model):

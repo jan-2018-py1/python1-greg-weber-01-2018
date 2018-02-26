@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Club | Add Book</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <h2>Add a new Book and Review:</h2>
+    <!-- add form with post goint to  /books/create -->
+    <p><a style='margin-left:10px' href="/books">Home</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p> 
+    <div style='margin: 30px; width: 550px'>
+        <form action="/review/create" method='post'>
+            {% csrf_token%}
+            <div class="form-group">
+                <label for="title">Book Title:</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+            <div class="form-group">
+                <label for="author list">Choose From list of authors:</label>
+                <select name="author_list">
+                    {% for author in authors%}
+                    <option>{{author.name}}</option>
+                    {% endfor %}
+                </select>
+                <label for="new_author">...or..Add new Author:</label>
+                <input type="text" class="form-control" name="new_author" placeholder='leave this field empty if using list of authors'>
+            </div>      
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea name='review' rows="4" cols="80"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="stars">Star Rating:</label>
+                <select name="stars">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>  
+            <button type="submit" class="btn btn-primary" style="background-color:green">Add Book</button>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} style='color:red' class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

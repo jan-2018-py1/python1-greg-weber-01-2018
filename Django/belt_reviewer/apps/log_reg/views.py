@@ -24,12 +24,13 @@ def create(req):
         # grab post data and insert into db
         first_name = req.POST['first_name']
         last_name = req.POST['last_name']
+        alias = req.POST['alias']
         email = req.POST['email']
         password = User.objects.password_hasher(req.POST['password']) #hashes pwd in models
-        new_user = User.objects.create(first_name=first_name, last_name=last_name, email=email, password=password)
+        new_user = User.objects.create(first_name=first_name, last_name=last_name, alias=alias, email=email, password=password)
         #login to sessions
         req.session['user_id'] = new_user.id
-        return redirect('/success')
+        return redirect('/books')  #this is in the book_club app view
 
 def login(req):
     # use login_validator method to check if info matches in db, then redirect to show or error messages to index
@@ -42,7 +43,7 @@ def login(req):
     else: #log user into session
         this_user = User.objects.get(email=req.POST['email'])
         req.session['user_id'] = this_user.id
-        return redirect('/success')
+        return redirect('/books')  #this is in the book_club app view
         
 def logout(req):
     req.session.clear()

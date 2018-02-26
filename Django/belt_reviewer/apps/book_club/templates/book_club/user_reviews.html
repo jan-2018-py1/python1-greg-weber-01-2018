@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Club | User Reviews</title>
+</head>
+<body>
+    <p style="text-align:right; margin-right:30px"><a style='margin-left:10px' href="/books">Home</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p>
+    <div style='margin:20px'>
+        <h2><User Alias: {{alias}}/h2>
+        <p>Name: {{name}}</p>
+        <p>Email: {{email}}</p>
+        <p>Total Reviews: {{review_count}}</p>
+    </div>
+    <div style='margin:20px'>
+        <h3>Posted reviews on the following books:</h3>
+        <div style='margin:20px'>   
+            {% for review in reviewed_books%}
+                <p> <a href="/books/{{review.book.id}}">{{review.book.title}}</a></p>
+            {%  endfor %}
+        </div>
+    </div>
+</body>
+</html>

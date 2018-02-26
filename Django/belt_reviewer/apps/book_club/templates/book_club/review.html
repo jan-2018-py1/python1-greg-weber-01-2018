@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Club | Review</title>
+</head>
+<body>
+    <h2>{{this_book}}</h2>
+    <p><a style='margin-left:10px' href="/books">Home</a> </span> <a style='margin-left:10px'href="/logout">Logout</a></p>  
+    <div id='reviews' style="display:inline-block; width:400px; margin:20px">
+        <h3>Reviews:</h3>
+        <div>
+            {% for review in reviews%}
+            <hr>
+            <p>Rating: {{review.stars}} star(s)</p>
+            <p><a href="/users/{{review.user.id}}">{{review.user}}</a> says: {{review.content}}</p>
+            <p>Posted on: {{review.created_at}}</p>
+                {% if review.user.id == user_id %}
+                    <a href="/review/delete/{{review.id}}">delete your review</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div style="width:300px; margin-left:20px; display:inline-block; vertical-align:top">
+        <h3>Add a review</h3>
+        <form action="/review/new" method='post'>
+            {% csrf_token%}
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea name='review' rows="4" cols="80"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="stars">Star Rating:</label>
+                <select name="stars">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div> 
+            <input type="hidden" name="book_id" value='{{book_id}}'> 
+            <button type="submit" class="btn btn-primary" style="background-color:green">Add Book</button>
+        </form>
+    </div>
+    
+    
+</body>
+</html>
