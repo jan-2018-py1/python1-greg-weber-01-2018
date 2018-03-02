@@ -5,12 +5,15 @@ from django.contrib import messages
 def index(req):
     # grab user from DB using session id
     user = User.objects.get(id=req.session['user_id'])
-    #grab all reviews
-    all_books = Book.objects.all()
     last_3 = Review.objects.all().order_by('-id')[:3]
+    # grab the id's of the books in last three reviews
+    last_3_book_ids = []
+    for review in last_3:
+        last_3_book_ids.append(review.book.id)
+    other_books = Book.objects.exclude(pk__in=list(last_3_book_ids))
     context = {
         'alias' : user.alias,
-        'all_books': all_books,
+        'other_books': other_books,
         'recent_reviews': last_3
     }
     return render(req, 'book_club/user_dashboard.html', context)
@@ -59,14 +62,23 @@ def user_reviews(req, id):
     else:
         return redirect('/')
     #number of reviews by this user
+    print id 
     review_count = len(user.reviews.all())
-    reviewed_books = user.reviews.all()
+    #this next part grabs a distinct list of book titles that the user has reviewed, allowing that the user if free to write more than one review for each book. 
+    reviewed_books = Review.objects.filter(user=User.objects.get(id=id))
+    reviewed_books_titles = []
+    for book in reviewed_books:
+        reviewed_books_titles.append(book.book.title)
+    distinct_title_list = []
+    for book in reviewed_books_titles:
+        if book not in distinct_title_list:
+            distinct_title_list.append(book)
     context = {
         'alias' : user.alias,
         'name' : '{} {}'.format(user.first_name, user.last_name),
         'email' : user.email,
         'review_count' : review_count,
-        'reviewed_books': reviewed_books
+        'reviewed_books':  distinct_title_list
     }
 
     return render(req, 'book_club/user_reviews.html', context)

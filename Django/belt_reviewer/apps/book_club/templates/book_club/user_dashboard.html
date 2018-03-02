@@ -27,7 +27,7 @@
     <div style='display:inline-block; width:200px; vertical-align:top; margin-left:200px; margin-top: 50px'>
         <h3>Other Books with reviews: scroll down for more...</h3>
         <div style='text-align:center; border:1px solid black; height:150px; overflow:scroll'>
-            {% for book in all_books %}
+            {% for book in other_books %}
             <p><a href="/books/{{book.id}}">{{book.title}}</a></p>
             {% endfor%}
         </div>

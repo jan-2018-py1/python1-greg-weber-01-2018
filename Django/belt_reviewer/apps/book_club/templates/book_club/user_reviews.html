@@ -17,8 +17,8 @@
     <div style='margin:20px'>
         <h3>Posted reviews on the following books:</h3>
         <div style='margin:20px'>   
-            {% for review in reviewed_books%}
-                <p> <a href="/books/{{review.book.id}}">{{review.book.title}}</a></p>
+            {% for title in reviewed_books%}
+                <p> <a href="/books/{{review.book.id}}">{{title}}</a></p>
             {%  endfor %}
         </div>
     </div>
