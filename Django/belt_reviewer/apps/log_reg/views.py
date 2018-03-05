@@ -5,8 +5,8 @@ from django.contrib import messages
 
 def index(req):
     #render the index page with log/reg forms
-    if 'user_id' not in req.session:
-        req.session['user_id'] = ''
+    if 'user_id' in req.session:
+        return redirect('/books')
     return render(req, 'log_reg/index.html')
 
 def show(req):

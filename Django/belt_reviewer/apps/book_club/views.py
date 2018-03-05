@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from models import *
 from django.contrib import messages
-
+  
 def index(req):
     # grab user from DB using session id
     user = User.objects.get(id=req.session['user_id'])
@@ -80,7 +80,7 @@ def user_reviews(req, id):
         'review_count' : review_count,
         'reviewed_books':  distinct_title_list
     }
-
+    
     return render(req, 'book_club/user_reviews.html', context)
 
 def review_create(req):

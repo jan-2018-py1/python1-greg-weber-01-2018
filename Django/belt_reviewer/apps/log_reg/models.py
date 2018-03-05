@@ -12,12 +12,10 @@ class UserManager(models.Manager):
         for key in postData:
             if postData[key] == '':
                 errors['empty_fields'] = 'All input fields must be filled'
-        #querry a user object with the post email to see if it already exists in th edb
-        try: 
-            if User.objects.get(email=postData['email']):
-                errors['not_unique'] = 'There is already a user with this email, please login.'
-        except:
-            pass
+        #querry a user object with the post email to see if it already exists in the db
+        if User.objects.filter(email=postData['email']).exists():
+             errors['not_unique'] = 'There is already a user with this email, please login.'
+             return errors
         if not postData['first_name'].isalpha() or len(postData['first_name']) < 2:
             errors['first_name'] = "First name must longer than 2 characters and contain no numbers"   
         if not postData['last_name'].isalpha() or len(postData['last_name']) < 2:
@@ -45,11 +43,11 @@ class UserManager(models.Manager):
         this_user = User.objects.filter(email=postData['email']) #returns a queryset
 
         #this try and except is covers the case that the user info is not in the db since the filter query about could return an empty set...
-        try:
-            if not bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode()):
-                errors['login_fail'] = 'user info does not match data base - please try again or register'
-        except:
-            errors['login_fail'] = 'user info does not match data base - please try again or register'
+        # try:
+        #     if not bcrypt.checkpw(postData['password'].encode(), this_user[0].password.encode()):
+        #         errors['login_fail'] = 'user info does not match data base - please try again or register'
+        # except:
+        #     errors['login_fail'] = 'user info does not match data base - please try again or register'
         return errors
 
 class User(models.Model):
